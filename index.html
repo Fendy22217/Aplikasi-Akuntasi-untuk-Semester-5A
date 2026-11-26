@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Apotek Accounting | Universitas Kadiri</title>
+<style>
+:root{--navy:#15324b;--blue:#236b91;--teal:#168b83;--bg:#f3f6f9;--ink:#203040;--muted:#6c7b89;--line:#e3e9ef;--white:#fff;--red:#c74c4c;--gold:#d79a32}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+header{background:linear-gradient(120deg,#122d45,#1e5877);color:white;padding:24px max(20px,calc((100% - 1200px)/2));}
+.brand{display:flex;align-items:center;gap:13px}.logo{width:46px;height:46px;border-radius:13px;background:#ffffff1c;display:grid;place-items:center;font-size:25px}
+h1{font-size:22px;margin:0;font-weight:750;letter-spacing:.2px}header p{margin:4px 0 0;color:#d7e6ef;font-size:12px}
+.ribbon{display:inline-flex;margin-top:16px;padding:5px 10px;border:1px solid #ffffff50;border-radius:30px;font-size:11px;letter-spacing:.5px;color:#fff;background:#ffffff12}
+.wrap{max-width:1200px;margin:0 auto;padding:22px 20px 50px}
+.notice{background:#fff8e9;border:1px solid #f1dfb7;color:#72551e;padding:11px 14px;border-radius:10px;font-size:12px;margin-bottom:18px}
+nav{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:20px}
+nav button,.btn{border:1px solid var(--line);background:#fff;color:var(--ink);padding:9px 13px;border-radius:9px;cursor:pointer;font-weight:600;font-size:12px}
+nav button.active{background:var(--navy);border-color:var(--navy);color:#fff}
+button:hover{filter:brightness(.97)}button:disabled{opacity:.5;cursor:not-allowed}
+.btn.primary{background:var(--blue);border-color:var(--blue);color:#fff}.btn.danger{color:var(--red);border-color:#f0d1d1}.btn.small{padding:6px 9px;font-size:11px}
+.page{display:none}.page.active{display:block}
+.section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin:8px 0 15px;flex-wrap:wrap}
+h2{font-size:19px;margin:0;color:var(--navy)}.sub{color:var(--muted);font-size:12px;margin-top:3px}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+.card,.panel{background:#fff;border:1px solid var(--line);border-radius:13px;padding:16px;box-shadow:0 2px 7px #20304008}
+.card .label{font-size:11px;color:var(--muted);font-weight:600}.card .value{font-size:22px;font-weight:750;margin-top:6px;color:var(--navy);letter-spacing:-.5px}.card .hint{font-size:10px;color:var(--muted);margin-top:3px}
+.panel{margin-bottom:16px}.panel h3{margin:0 0 12px;font-size:14px;color:var(--navy)}
+.grid2{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}
+.formgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.field{display:flex;flex-direction:column;gap:5px}.field.full{grid-column:1/-1}label{font-size:11px;color:#536575;font-weight:650}
+input,select,textarea{width:100%;padding:10px 11px;border:1px solid #dce4eb;border-radius:8px;background:#fff;color:var(--ink);font:inherit;font-size:13px;outline:none}
+input:focus,select:focus,textarea:focus{border-color:#6da7c4;box-shadow:0 0 0 3px #236b9115}
+.actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:14px}
+table{width:100%;border-collapse:collapse;font-size:12px}th{text-align:left;color:#667887;background:#f7f9fb;font-size:10px;text-transform:uppercase;letter-spacing:.4px;padding:10px 9px;border-bottom:1px solid var(--line)}td{padding:10px 9px;border-bottom:1px solid #edf1f4;vertical-align:top}tr:last-child td{border-bottom:0}.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}.muted{color:var(--muted)}.positive{color:var(--teal)}.negative{color:var(--red)}
+.tablewrap{overflow-x:auto}.empty{text-align:center;color:var(--muted);padding:26px 10px}
+.pill{display:inline-block;padding:3px 7px;border-radius:20px;background:#eaf3f8;color:#28617e;font-size:10px;font-weight:700}
+.balance-ok{color:var(--teal);font-weight:700}.balance-bad{color:var(--red);font-weight:700}
+.footer{text-align:center;color:#8a98a5;font-size:10px;padding:20px 0}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.totalrow td{font-weight:750;background:#f7f9fb;border-top:1px solid var(--line)}
+@media(max-width:850px){.cards{grid-template-columns:repeat(2,1fr)}.grid2,.two-col{grid-template-columns:1fr}}
+@media(max-width:520px){header{padding:20px}.wrap{padding:16px 12px 35px}.cards{gap:8px}.card{padding:12px}.card .value{font-size:17px}.formgrid{grid-template-columns:1fr}.field.full{grid-column:auto}nav button{flex:1}}
+@media print{header{padding:12px 0;background:#fff;color:#000}header p,.ribbon,nav,.notice,.actions,.no-print{display:none!important}.wrap{padding:0;max-width:none}.page{display:none!important}.page.active{display:block!important}.panel,.card{box-shadow:none;break-inside:avoid}body{background:#fff}}
+</style>
+</head>
+<body>
+<header>
+ <div class="brand"><div class="logo">⚕</div><div><h1>APOTEK ACCOUNTING</h1><p>Sistem Informasi Akuntansi · Apotek Universitas Kadiri</p></div></div>
+ <div class="ribbon">PROTOTIPE PERKULIAHAN · MANAJEMEN FARMASI · FARMASI KELAS A</div>
+</header>
+<div class="wrap">
+ <div class="notice"><b>Catatan prototipe:</b> Aplikasi ini untuk simulasi pembelajaran, bukan sistem pembukuan resmi. Data tersimpan di browser/perangkat ini (localStorage), belum tersinkron ke GitHub atau perangkat lain. Gunakan data simulasi, bukan data pasien.</div>
+ <nav>
+  <button class="active" data-page="dashboard">Dashboard</button><button data-page="transactions">Transaksi</button><button data-page="journal">Jurnal Umum</button><button data-page="ledger">Buku Besar</button><button data-page="trial">Neraca Saldo</button><button data-page="reports">Laporan Keuangan</button>
+ </nav>
+ <section id="dashboard" class="page active">
+  <div class="section-head"><div><h2>Dashboard Keuangan</h2><div class="sub">Ringkasan posisi keuangan berdasarkan transaksi yang dicatat</div></div><button class="btn" onclick="printActive()">Cetak ringkasan</button></div>
+  <div class="cards">
+   <div class="card"><div class="label">TOTAL ASET</div><div class="value" id="dAssets">Rp0</div><div class="hint">Kas + piutang + persediaan</div></div>
+   <div class="card"><div class="label">TOTAL LIABILITAS</div><div class="value" id="dLiab">Rp0</div><div class="hint">Utang usaha</div></div>
+   <div class="card"><div class="label">EKUITAS</div><div class="value" id="dEquity">Rp0</div><div class="hint">Modal + laba − prive</div></div>
+   <div class="card"><div class="label">LABA / (RUGI)</div><div class="value" id="dProfit">Rp0</div><div class="hint">Pendapatan − HPP − beban</div></div>
+  </div>
+  <div class="grid2">
+   <div class="panel"><h3>Posisi Keuangan</h3><div id="positionSummary"></div></div>
+   <div class="panel"><h3>Aktivitas Pembukuan</h3><div class="cards" style="grid-template-columns:1fr 1fr;margin:0"><div><div class="label">JUMLAH TRANSAKSI</div><div class="value" id="dCount">0</div></div><div><div class="label">PERIODE TERAKHIR</div><div class="value" style="font-size:14px" id="dPeriod">-</div></div></div><p class="sub">Mulai dengan memasukkan saldo awal atau transaksi pertama.</p><button class="btn primary" onclick="showPage('transactions')">+ Input transaksi</button></div>
+  </div>
+  <div class="panel"><h3>Transaksi Terbaru</h3><div class="tablewrap" id="recentTable"></div></div>
+ </section>
+ <section id="transactions" class="page">
+  <div class="section-head"><div><h2>Input Transaksi</h2><div class="sub">Pilih jenis transaksi; jurnal debit dan kredit dibuat otomatis.</div></div></div>
+  <div class="grid2">
+   <div class="panel">
+    <h3>Formulir Transaksi</h3>
+    <form id="txForm">
+     <div class="formgrid">
+      <div class="field"><label for="txDate">Tanggal</label><input id="txDate" type="date" required></div>
+      <div class="field"><label for="txType">Jenis transaksi</label><select id="txType" required>
+       <option value="capital">Setoran modal awal / tambahan</option><option value="opening_inventory">Saldo awal persediaan dari modal</option><option value="buy_cash">Pembelian obat tunai</option><option value="buy_credit">Pembelian obat kredit</option><option value="sale_cash">Penjualan obat tunai</option><option value="sale_credit">Penjualan obat kredit</option><option value="receive_ar">Penerimaan pelunasan piutang</option><option value="pay_ap">Pembayaran utang usaha</option><option value="expense">Pembayaran beban operasional</option><option value="draw">Pengambilan pribadi (prive)</option><option value="other_income">Pendapatan lain-lain tunai</option>
+      </select></div>
+      <div class="field full"><label for="txDesc">Keterangan transaksi</label><input id="txDesc" placeholder="Contoh: Pembelian obat dari PBF Sehat" required></div>
+      <div class="field"><label for="txAmount">Nominal transaksi (Rp)</label><input id="txAmount" type="number" min="1" step="1" placeholder="1000000" required></div>
+      <div class="field" id="hppField" style="display:none"><label for="txHpp">Harga pokok penjualan / HPP (Rp)</label><input id="txHpp" type="number" min="0" step="1" placeholder="Contoh: 600000"></div>
+     </div>
+     <div id="typeHelp" class="notice" style="margin:12px 0 0">Kas bertambah dan modal pemilik bertambah.</div>
+     <div class="actions"><button class="btn primary" type="submit">Simpan transaksi</button><button class="btn" type="reset">Kosongkan</button></div>
+    </form>
+   </div>
+   <div class="panel"><h3>Panduan pencatatan</h3><p class="sub">Gunakan transaksi sesuai kondisi simulasi. Untuk transaksi penjualan, masukkan HPP agar persediaan dan laba dihitung dengan benar.</p>
+    <table><tr><td><b>Penjualan</b></td><td>Nominal = nilai jual; HPP = harga perolehan barang terjual.</td></tr><tr><td><b>Pembelian</b></td><td>Menambah persediaan; tunai mengurangi kas, kredit menambah utang.</td></tr><tr><td><b>Beban</b></td><td>Contoh gaji, listrik, sewa, administrasi.</td></tr><tr><td><b>Saldo awal</b></td><td>Masukkan modal dan persediaan awal secara terpisah jika diperlukan.</td></tr></table>
+    <p class="sub">Catatan: prototipe menggunakan metode persediaan perpetual sederhana dan belum menangani pajak, retur, diskon, penyusutan, atau penyesuaian akhir periode.</p>
+   </div>
+  </div>
+  <div class="panel"><div class="section-head"><div><h3>Daftar Transaksi</h3><div class="sub">Transaksi tersimpan di perangkat ini</div></div><button class="btn small" onclick="exportTransactions()">Ekspor CSV</button></div><div class="tablewrap" id="txTable"></div></div>
+ </section>
+ <section id="journal" class="page">
+  <div class="section-head"><div><h2>Jurnal Umum</h2><div class="sub">Rincian debit dan kredit dari setiap transaksi</div></div><button class="btn" onclick="exportJournal()">Ekspor jurnal CSV</button></div>
+  <div class="panel"><div class="tablewrap" id="journalTable"></div></div>
+ </section>
+ <section id="ledger" class="page">
+  <div class="section-head"><div><h2>Buku Besar</h2><div class="sub">Mutasi dan saldo akhir setiap akun</div></div><select id="ledgerAccount" style="max-width:250px" onchange="renderLedger()"></select></div>
+  <div class="panel"><div class="tablewrap" id="ledgerTable"></div></div>
+ </section>
+ <section id="trial" class="page">
+  <div class="section-head"><div><h2>Neraca Saldo</h2><div class="sub">Saldo normal setiap akun sebelum penyesuaian</div></div><button class="btn" onclick="window.print()">Cetak</button></div>
+  <div class="panel"><div class="tablewrap" id="trialTable"></div></div>
+ </section>
+ <section id="reports" class="page">
+  <div class="section-head"><div><h2>Laporan Keuangan</h2><div class="sub">Laporan laba rugi dan posisi keuangan</div></div><button class="btn primary" onclick="window.print()">Cetak / Simpan PDF</button></div>
+  <div class="two-col">
+   <div class="panel"><h3>Laporan Laba Rugi</h3><div id="incomeReport"></div></div>
+   <div class="panel"><h3>Laporan Posisi Keuangan (Neraca)</h3><div id="balanceReport"></div></div>
+  </div>
+  <div class="panel"><h3>Persamaan Akuntansi</h3><div id="equationReport"></div></div>
+ </section>
+ <div class="footer">APOTEK ACCOUNTING · PROTOTIPE PEMBELAJARAN · UNIVERSITAS KADIRI · FARMASI KELAS A</div>
+</div>
+<script>
+const KEY='apotekAccountingKelasA_v1';
+const accountNames={cash:'Kas',ar:'Piutang Usaha',inventory:'Persediaan Obat',ap:'Utang Usaha',capital:'Modal Pemilik',draw:'Prive',sales:'Penjualan',otherIncome:'Pendapatan Lain-lain',cogs:'Harga Pokok Penjualan',expense:'Beban Operasional'};
+const normal={cash:'D',ar:'D',inventory:'D',ap:'K',capital:'K',draw:'D',sales:'K',otherIncome:'K',cogs:'D',expense:'D'};
+const types={capital:'Setoran modal',opening_inventory:'Saldo awal persediaan',buy_cash:'Pembelian tunai',buy_credit:'Pembelian kredit',sale_cash:'Penjualan tunai',sale_credit:'Penjualan kredit',receive_ar:'Penerimaan piutang',pay_ap:'Pembayaran utang',expense:'Beban operasional',draw:'Prive',other_income:'Pendapatan lain-lain'};
+let transactions=load();
+function load(){try{return JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){return []}}
+function save(){localStorage.setItem(KEY,JSON.stringify(transactions));renderAll()}
+function rupiah(n){return new Intl.NumberFormat('id-ID',{style:'currency',currency:'IDR',maximumFractionDigits:0}).format(n||0)}
+function dateFmt(d){if(!d)return '-';return new Date(d+'T00:00:00').toLocaleDateString('id-ID',{day:'2-digit',month:'short',year:'numeric'})}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function entries(t){
+ const a=t.amount,h=t.hpp||0;
+ switch(t.type){
+ case 'capital':return [{a:'cash',d:a,k:0},{a:'capital',d:0,k:a}];
+ case 'opening_inventory':return [{a:'inventory',d:a,k:0},{a:'capital',d:0,k:a}];
+ case 'buy_cash':return [{a:'inventory',d:a,k:0},{a:'cash',d:0,k:a}];
+ case 'buy_credit':return [{a:'inventory',d:a,k:0},{a:'ap',d:0,k:a}];
+ case 'sale_cash':return [{a:'cash',d:a,k:0},{a:'sales',d:0,k:a},...(h?[{a:'cogs',d:h,k:0},{a:'inventory',d:0,k:h}]:[])];
+ case 'sale_credit':return [{a:'ar',d:a,k:0},{a:'sales',d:0,k:a},...(h?[{a:'cogs',d:h,k:0},{a:'inventory',d:0,k:h}]:[])];
+ case 'receive_ar':return [{a:'cash',d:a,k:0},{a:'ar',d:0,k:a}];
+ case 'pay_ap':return [{a:'ap',d:a,k:0},{a:'cash',d:0,k:a}];
+ case 'expense':return [{a:'expense',d:a,k:0},{a:'cash',d:0,k:a}];
+ case 'draw':return [{a:'draw',d:a,k:0},{a:'cash',d:0,k:a}];
+ case 'other_income':return [{a:'cash',d:a,k:0},{a:'otherIncome',d:0,k:a}];
+ default:return [];
+ }
+}
+function totals(){
+ let b={};Object.keys(accountNames).forEach(k=>b[k]={d:0,k:0});
+ transactions.forEach(t=>entries(t).forEach(e=>{b[e.a].d+=e.d;b[e.a].k+=e.k}));
+ let bal={};Object.keys(b).forEach(k=>bal[k]=b[k].d-b[k].k);
+ const assets=bal.cash+bal.ar+bal.inventory,liab=-bal.ap,capital=-bal.capital,draw=bal.draw;
+ const revenue=-bal.sales-bal.otherIncome, cogs=bal.cogs,expense=bal.expense,profit=revenue-cogs-expense;
+ const equity=capital+profit-draw;
+ return {b,bal,assets,liab,capital,draw,revenue,cogs,expense,profit,equity};
+}
+function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===id));document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===id));renderAll();window.scrollTo({top:0,behavior:'smooth'})}
+document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page)));
+function printActive(){window.print()}
+const txType=document.getElementById('txType');
+function updateType(){let sale=txType.value.startsWith('sale_');document.getElementById('hppField').style.display=sale?'flex':'none';document.getElementById('txHpp').required=false;let help={capital:'Kas bertambah dan modal pemilik bertambah.',opening_inventory:'Persediaan awal bertambah dan dicatat sebagai kontribusi modal.',buy_cash:'Persediaan bertambah dan kas berkurang.',buy_credit:'Persediaan bertambah dan utang usaha bertambah.',sale_cash:'Kas dan penjualan bertambah. HPP mengurangi persediaan dan menjadi beban.',sale_credit:'Piutang dan penjualan bertambah. HPP mengurangi persediaan dan menjadi beban.',receive_ar:'Kas bertambah dan piutang berkurang.',pay_ap:'Utang usaha dan kas berkurang.',expense:'Beban operasional bertambah dan kas berkurang.',draw:'Prive bertambah dan kas berkurang.',other_income:'Kas dan pendapatan lain-lain bertambah.'};document.getElementById('typeHelp').textContent=help[txType.value]}
+txType.addEventListener('change',updateType);
+document.getElementById('txDate').value=new Date().toISOString().slice(0,10);
+document.getElementById('txForm').addEventListener('submit',e=>{
+ e.preventDefault();let type=txType.value,amount=Number(document.getElementById('txAmount').value),hpp=Number(document.getElementById('txHpp').value||0);
+ if(!amount||amount<=0){alert('Nominal harus lebih dari nol.');return}
+ if(type.startsWith('sale_')&&hpp>amount){alert('HPP tidak boleh melebihi nilai penjualan.');return}
+ let t={id:Date.now(),date:document.getElementById('txDate').value,type,desc:document.getElementById('txDesc').value.trim(),amount,hpp};
+ transactions.push(t);save();e.target.reset();document.getElementById('txDate').value=new Date().toISOString().slice(0,10);updateType();alert('Transaksi berhasil disimpan dan jurnal otomatis dibuat.');
+});
+function delTx(id){if(confirm('Hapus transaksi ini? Laporan akan dihitung ulang.')){transactions=transactions.filter(t=>t.id!==id);save()}}
+function txRows(list){if(!list.length)return '<div class="empty">Belum ada transaksi. Silakan input transaksi pertama.</div>';return `<table><thead><tr><th>Tanggal</th><th>Jenis / Keterangan</th><th class="num">Nominal</th><th class="no-print">Aksi</th></tr></thead><tbody>${list.map(t=>`<tr><td>${dateFmt(t.date)}</td><td><b>${esc(types[t.type])}</b><br><span class="muted">${esc(t.desc)}</span></td><td class="num">${rupiah(t.amount)}</td><td class="no-print"><button class="btn small danger" onclick="delTx(${t.id})">Hapus</button></td></tr>`).join('')}</tbody></table>`}
+function journalRows(){let rows=[];transactions.slice().sort((a,b)=>a.date.localeCompare(b.date)||a.id-b.id).forEach(t=>entries(t).forEach(e=>rows.push({date:t.date,desc:t.desc,account:accountNames[e.a],d:e.d,k:e.k})));if(!rows.length)return '<div class="empty">Jurnal belum tersedia.</div>';return `<table><thead><tr><th>Tanggal</th><th>Keterangan</th><th>Akun</th><th class="num">Debit</th><th class="num">Kredit</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${dateFmt(r.date)}</td><td>${esc(r.desc)}</td><td>${r.account}</td><td class="num">${r.d?rupiah(r.d):'-'}</td><td class="num">${r.k?rupiah(r.k):'-'}</td></tr>`).join('')}</tbody></table>`}
+function renderLedger(){let sel=document.getElementById('ledgerAccount'),key=sel.value||'cash';let rows=[];transactions.slice().sort((a,b)=>a.date.localeCompare(b.date)||a.id-b.id).forEach(t=>entries(t).filter(e=>e.a===key).forEach(e=>rows.push({date:t.date,desc:t.desc,d:e.d,k:e.k})));let run=0;let body=rows.map(r=>{run+=r.d-r.k;return `<tr><td>${dateFmt(r.date)}</td><td>${esc(r.desc)}</td><td class="num">${r.d?rupiah(r.d):'-'}</td><td class="num">${r.k?rupiah(r.k):'-'}</td><td class="num">${rupiah(Math.abs(run))} ${run<0?'(K)':'(D)'}</td></tr>`}).join('');document.getElementById('ledgerTable').innerHTML=rows.length?`<table><thead><tr><th>Tanggal</th><th>Keterangan</th><th class="num">Debit</th><th class="num">Kredit</th><th class="num">Saldo berjalan</th></tr></thead><tbody>${body}</tbody></table>`:'<div class="empty">Belum ada mutasi pada akun ini.</div>'}
+function renderAll(){
+ let x=totals();document.getElementById('dAssets').textContent=rupiah(x.assets);document.getElementById('dLiab').textContent=rupiah(x.liab);document.getElementById('dEquity').textContent=rupiah(x.equity);document.getElementById('dProfit').textContent=rupiah(x.profit);document.getElementById('dProfit').className='value '+(x.profit>=0?'positive':'negative');document.getElementById('dCount').textContent=transactions.length;document.getElementById('dPeriod').textContent=transactions.length?dateFmt(transactions.slice().sort((a,b)=>b.date.localeCompare(a.date))[0].date):'-';
+ let diff=x.assets-(x.liab+x.equity);document.getElementById('positionSummary').innerHTML=`<table><tr><td>Total Aset</td><td class="num">${rupiah(x.assets)}</td></tr><tr><td>Total Liabilitas</td><td class="num">${rupiah(x.liab)}</td></tr><tr><td>Total Ekuitas</td><td class="num">${rupiah(x.equity)}</td></tr><tr class="totalrow"><td>Liabilitas + Ekuitas</td><td class="num">${rupiah(x.liab+x.equity)}</td></tr></table><p class="${Math.abs(diff)<1?'balance-ok':'balance-bad'}">Selisih persamaan akuntansi: ${rupiah(diff)} ${Math.abs(diff)<1?'✓ Seimbang':'! Periksa pencatatan'}</p>`;
+ document.getElementById('recentTable').innerHTML=txRows(transactions.slice().sort((a,b)=>b.date.localeCompare(a.date)||b.id-a.id).slice(0,5));
+ document.getElementById('txTable').innerHTML=txRows(transactions.slice().sort((a,b)=>b.date.localeCompare(a.date)||b.id-a.id));
+ document.getElementById('journalTable').innerHTML=journalRows();
+ let sel=document.getElementById('ledgerAccount'),old=sel.value;sel.innerHTML=Object.keys(accountNames).map(k=>`<option value="${k}">${accountNames[k]}</option>`).join('');sel.value=old||'cash';renderLedger();
+ let tb=Object.keys(accountNames).map(k=>({k,d:x.b[k].d,kredit:x.b[k].k,bal:x.b[k].d-x.b[k].k})).filter(r=>r.d||r.kredit);
+ let sumD=tb.reduce((s,r)=>s+r.d,0),sumK=tb.reduce((s,r)=>s+r.kredit,0);
+ document.getElementById('trialTable').innerHTML=tb.length?`<table><thead><tr><th>Nama akun</th><th class="num">Debit</th><th class="num">Kredit</th></tr></thead><tbody>${tb.map(r=>`<tr><td>${accountNames[r.k]}</td><td class="num">${r.bal>0?rupiah(r.bal):'-'}</td><td class="num">${r.bal<0?rupiah(-r.bal):'-'}</td></tr>`).join('')}<tr class="totalrow"><td>Jumlah</td><td class="num">${rupiah(sumD)}</td><td class="num">${rupiah(sumK)}</td></tr></tbody></table><p class="${Math.abs(sumD-sumK)<1?'balance-ok':'balance-bad'}">Status: ${Math.abs(sumD-sumK)<1?'Debit dan kredit seimbang':'Tidak seimbang'}</p>`:'<div class="empty">Neraca saldo akan tampil setelah transaksi dicatat.</div>';
+ document.getElementById('incomeReport').innerHTML=`<table><tr><td>Pendapatan penjualan</td><td class="num">${rupiah(x.revenue)}</td></tr><tr><td>Harga pokok penjualan</td><td class="num">(${rupiah(x.cogs)})</td></tr><tr class="totalrow"><td>Laba kotor</td><td class="num">${rupiah(x.revenue-x.cogs)}</td></tr><tr><td>Beban operasional</td><td class="num">(${rupiah(x.expense)})</td></tr><tr class="totalrow"><td>LABA / (RUGI) BERSIH</td><td class="num">${rupiah(x.profit)}</td></tr></table>`;
+ document.getElementById('balanceReport').innerHTML=`<b>Aset</b><table><tr><td>Kas</td><td class="num">${rupiah(x.bal.cash)}</td></tr><tr><td>Piutang usaha</td><td class="num">${rupiah(x.bal.ar)}</td></tr><tr><td>Persediaan obat</td><td class="num">${rupiah(x.bal.inventory)}</td></tr><tr class="totalrow"><td>Total aset</td><td class="num">${rupiah(x.assets)}</td></tr></table><br><b>Liabilitas dan Ekuitas</b><table><tr><td>Utang usaha</td><td class="num">${rupiah(x.liab)}</td></tr><tr><td>Modal pemilik</td><td class="num">${rupiah(x.capital)}</td></tr><tr><td>Laba / (rugi) berjalan</td><td class="num">${rupiah(x.profit)}</td></tr><tr><td>Prive</td><td class="num">(${rupiah(x.draw)})</td></tr><tr class="totalrow"><td>Total liabilitas + ekuitas</td><td class="num">${rupiah(x.liab+x.equity)}</td></tr></table>`;
+ document.getElementById('equationReport').innerHTML=`<div class="cards" style="grid-template-columns:repeat(3,1fr);margin:0"><div><div class="label">ASET</div><div class="value">${rupiah(x.assets)}</div></div><div><div class="label">LIABILITAS</div><div class="value">${rupiah(x.liab)}</div></div><div><div class="label">EKUITAS</div><div class="value">${rupiah(x.equity)}</div></div></div><p class="${Math.abs(diff)<1?'balance-ok':'balance-bad'}">Aset = Liabilitas + Ekuitas · ${Math.abs(diff)<1?'Persamaan seimbang':'Terdapat selisih '+rupiah(diff)}</p>`;
+}
+function download(name,content,type='text/csv;charset=utf-8;'){let blob=new Blob(['\ufeff'+content],{type}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();URL.revokeObjectURL(a.href)}
+function csvCell(v){return '"'+String(v??'').replace(/"/g,'""')+'"'}
+function exportTransactions(){let rows=[['Tanggal','Jenis','Keterangan','Nominal','HPP'],...transactions.map(t=>[t.date,types[t.type],t.desc,t.amount,t.hpp||0])];download('transaksi-apotek.csv',rows.map(r=>r.map(csvCell).join(';')).join('\n'))}
+function exportJournal(){let rows=[['Tanggal','Keterangan','Akun','Debit','Kredit']];transactions.forEach(t=>entries(t).forEach(e=>rows.push([t.date,t.desc,accountNames[e.a],e.d,e.k])));download('jurnal-umum-apotek.csv',rows.map(r=>r.map(csvCell).join(';')).join('\n'))}
+updateType();renderAll();
+</script>
+</body></html>
